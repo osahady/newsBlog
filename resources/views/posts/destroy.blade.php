@@ -1,0 +1,2 @@
+HELLO DESTROY
+{{$post->id}}
