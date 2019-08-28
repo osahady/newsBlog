@@ -15,5 +15,12 @@
     @endif
 
     <h4>Comments</h4>
-
+    @forelse ($post->comments as $comment)
+        <ul>
+            <li>{{$comment->content}}</li>
+        </ul>
+        
+    @empty
+        <p>No comments yet! . . .</p>
+    @endforelse
 @endsection

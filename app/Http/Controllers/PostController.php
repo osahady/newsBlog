@@ -29,7 +29,7 @@ class PostController extends Controller
     {
         //$request->session()->reflash();
         return view('posts.show', [
-            'post' => BlogPost::findOrFail($id)
+            'post' => BlogPost::with('comments')->findOrFail($id)
         ]);
 
     }
