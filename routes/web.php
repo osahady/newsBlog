@@ -18,3 +18,4 @@ Route::get('/services', 'HomeController@services')->name('services');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 
 Route::resource('/posts', 'PostController'); 
+Auth::routes();

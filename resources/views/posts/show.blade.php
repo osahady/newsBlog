@@ -17,7 +17,7 @@
     <h4>Comments</h4>
     @forelse ($post->comments as $comment)
         <ul>
-            <li>{{$comment->content}}</li>
+            <li>{{$comment->content}}  <span class="text-muted">added {{$comment->created_at->diffForHumans()}} <span></li>
         </ul>
         
     @empty
