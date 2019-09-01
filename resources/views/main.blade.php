@@ -23,8 +23,9 @@
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="{{ route('home') }}">Home</a>
             <a class="p-2 text-dark" href="{{ route('contact') }}">Contact</a>
-            <a class="p-2 text-dark" href="{{ route('posts.index') }}">Blog Posts</a>
-            <a class="p-2 text-dark" href="{{ route('posts.create') }}">Add Blog Post</a>
+            <a class="p-2 text-dark" href="{{ route('posts.index') }}">Posts</a>
+            <a class="p-2 text-dark" href="{{ route('posts.create') }}">Add Post</a>
+            <a class="p-2 text-dark" href="{{ route('auth.register') }}">Register</a>
         </nav>
     </div>
     <div class="container">
