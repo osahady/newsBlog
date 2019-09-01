@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@home')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@aaa')->name('about');
 
 Route::get('/services', 'HomeController@services')->name('services');
@@ -19,3 +19,6 @@ Route::get('/contact', 'HomeController@contact')->name('contact');
 
 Route::resource('/posts', 'PostController'); 
 Auth::routes();
+
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -6,37 +6,23 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function home()
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        return view('main');
+        $this->middleware('auth');
     }
 
-    public function blog($id, $welcome=1)
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
     {
-        $pages = [
-            1 => [
-                'title' => ' page1'
-            ],
-            2 => [
-                'title' => ' page2'
-            ]
-        ];
-        $welcomes = [1 => 'hello from', 2 => 'welcome to'];
-    
-        return view('blog-post', ['data' => $pages[$id], 'greeting' => $welcomes[$welcome] ]);
-    }
-    public function aaa()
-    {
-        return view('about');
-    } 
-
-    public function contact()
-    {
-        return view('contact');
-    }
-
-    public function services()
-    {
-        return view('services');
+        return view('home');
     }
 }
