@@ -35,7 +35,7 @@
              class="form-check-input" value="{{old('remember') ? 'checked' : ''}} ">
             <label for="remember" class="form-check-label">Remember Me</label>
         </div>
-    </div>.0
+    </div>
     <button class="btn btn-primary btn-block" type="submit">Login</button>
 </form>
 @endsection
