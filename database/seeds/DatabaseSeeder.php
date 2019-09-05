@@ -14,22 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-        $osa = factory(User::class)->states('osa-hady')->create();
-        $else = factory(User::class, 20)->create();
-
-        //dd(get_class($osa), get_class($else));
-        $users = $else->concat([$osa]);
-        //dd($users->count());
-
-        $posts = factory(BlogPost::class, 50)->make()->each(function($post) use ($users){
-                    $post->user_id = $users->random()->id;
-                    $post->save();
-                });
+        $this->call(UsersTableSeeder::class);
+        $this->call(BlogPostsTableSeeder::class);
+        $this->call(CommentsTableSeeder::class);
         
-        $comments = factory(Comment::class, 150)->make()->each(function($comment) use ($posts){
-            $comment->blog_post_id = $posts->random()->id;
-            $comment->save();
-        });
     }
 }
