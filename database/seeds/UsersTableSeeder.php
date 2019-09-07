@@ -11,7 +11,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $usersCount = max((int)$this->command->ask('How many users do want?', 20), 1);
         factory(User::class)->states('osa-hady')->create();
-        factory(User::class, 20)->create();
+        factory(User::class, $usersCount)->create();
     }
 }
