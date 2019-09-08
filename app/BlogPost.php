@@ -15,11 +15,16 @@ class BlogPost extends Model
         return $this->hasMany(Comment::class);
     }
 
+    //soft Deleting comments
     public static function boot()
     {
         parent::boot();
-        // static::deleting(function(BlogPost $b){
-        //     $b->comments()->delete();
-        // });
+        static::deleting(function(BlogPost $b){
+            $b->comments()->delete();
+        });
+
+        static::restoring(function(BlogPost $b){
+            $b->comments()->restore();
+        });
     }
 }
