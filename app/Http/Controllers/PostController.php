@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\BlogPost;
 use App\Http\Requests\StorePost;
@@ -62,12 +62,19 @@ class PostController extends Controller
 
     public function edit($id)
     {
-        return view('posts.edit', ['post'=>BlogPost::findOrFail($id)]);
+        $post = BlogPost::findOrFail($id);
+        if (Gate::denies('update-post', $post)) {
+            abort(403, 'You can not update!');
+        }
+        return view('posts.edit', ['post'=>$post]);
     }
 
     public function update(StorePost $request, $id)
     {
         $post = BlogPost::findOrFail($id);
+        if (Gate::denies('update-post', $post)) {
+            abort(403, 'You can not update!');
+        }
         $validatedData = $request->validated();
         $post->fill($validatedData);
         $post->save();
