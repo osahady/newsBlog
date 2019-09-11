@@ -9,8 +9,8 @@ use App\User;
 class BlogPost extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['title', 'content'];  
-    //protected $guarded = [];
+    //protected $fillable = ['title', 'content'];  
+    protected $guarded = [];
     public function comments()
     {
         return $this->hasMany(Comment::class);
