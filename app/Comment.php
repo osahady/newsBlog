@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\BlogPost;
+use App\Scopes\LatestScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\BlogPost;
+
 class Comment extends Model
 {
     //use trait
@@ -14,5 +16,17 @@ class Comment extends Model
     public function blogPost()
     {
         return $this->belongsTo(BlogPost::class);
+    }
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new LatestScope);
     }
 }
