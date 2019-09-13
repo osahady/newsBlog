@@ -20,11 +20,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        
-        return view ('posts.index', 
-            ['posts' => BlogPost::withCount('comments')->orderBy('created_at', 'DESC')->get()]
+
+        return view ('posts.index',
+            ['posts' => BlogPost::withCount('comments')->get()]
         );
-    }     
+    }
     /**
      * Display the specified resource.
      *
@@ -42,16 +42,16 @@ class PostController extends Controller
 
     public function create()
     {
-        
+
         return view('posts.create');
     }
 
     public function store(StorePost $request)
     {
-        $validatedData = $request->validated(); 
-        $validatedData['user_id'] = $request->user()->id;       
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = $request->user()->id;
         $blogpost = BlogPost::create($validatedData);//mass assginment
-        
+
 
         // $blogpost->title = $request->input('title');
         // $blogpost->content = $request->input('content');
@@ -59,7 +59,7 @@ class PostController extends Controller
 
         $request->session()->flash('status', 'Post has been Inserted Successfully!');
         return redirect()->route('posts.show', ['post'=>$blogpost->id]);
-        
+
     }
 
     public function edit($id)
@@ -102,6 +102,6 @@ class PostController extends Controller
         $request->session()->flash('status',$t.' Post has been deleted successfully!');
         return redirect()->route('posts.index');
     }
-    
+
 }
 
