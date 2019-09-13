@@ -34,24 +34,44 @@
                 <p>There is no post. . . </p>
             @endforelse
         </div>
+
         <div class="col-4">
-            <div class="card" style="width: 18rem;">
-
-                <div class="card-body">
-                  <h5 class="card-title">Most Commented</h5>
-                  <p class="card-text">People are currently talking about: </p>
+            <div class="container">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Most Commented</h5>
+                        <p class="card-text">People are currently talking about: </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        @foreach ($mostCommented as $post)
+                            <a href="{{ route('posts.show', $post->id) }}">
+                                <li class="list-group-item">{{ $post->title }}</li>
+                            </a>
+                        @endforeach
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                    @foreach ($mostCommented as $post)
-                        <a href="{{ route('posts.show', $post->id) }}">
-                            <li class="list-group-item">{{ $post->title }}</li>
-                        </a>
-                    @endforeach
 
+                <div class="card mt-4" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Most Active Users</h5>
+                        <p class="card-text">People that are active: </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        @foreach ($mostActive as $user)
 
-                </ul>
+                            <li class="list-group-item">{{ $user->name }}</li>
 
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
+
+
+
+
+
+
+
     </div>
 @endsection

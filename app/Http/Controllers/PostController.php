@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
+use App\User;
 use App\BlogPost;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePost;
+use Illuminate\Support\Facades\Gate;
+
 class PostController extends Controller
 {
     public function __construct()
@@ -25,6 +27,7 @@ class PostController extends Controller
             [
                 'posts' => BlogPost::latest()->withCount('comments')->get(),
                 'mostCommented'=>BlogPost::mostCommented()->take(5)->get(),
+                'mostActive' =>User::withMostBlogPost()->take(5)->get(),
             ]
         );
     }

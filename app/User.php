@@ -41,4 +41,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(BlogPost::class);
     }
+
+    /**
+     * Scope a query to only include active users
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithMostBlogPost($query)
+    {
+        return $query->withCount('blogPosts')->orderBy('blog_posts_count');
+    }
 }
