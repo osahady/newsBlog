@@ -35,6 +35,18 @@ class BlogPost extends Model
         return $query->orderBy(static::CREATED_AT, 'desc');
     }
 
+    /**
+     * Scope a query to only include most commented blogposts
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeMostCommented(Builder $query)
+    {
+        return $query->withCount('comments')->orderBy('comments_count', 'desc');
+    }
+
+
     //soft Deleting comments
     public static function boot()
     {

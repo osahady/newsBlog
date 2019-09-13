@@ -14,7 +14,7 @@ class PostController extends Controller
         ]);
     }
     /**
-     * Display a listing of the resource.
+     * Display a listing of the blogPosts.
      *
      * @return \Illuminate\Http\Response
      */
@@ -22,11 +22,14 @@ class PostController extends Controller
     {
 
         return view ('posts.index',
-            ['posts' => BlogPost::latest()->withCount('comments')->get()]
+            [
+                'posts' => BlogPost::latest()->withCount('comments')->get(),
+                'mostCommented'=>BlogPost::mostCommented()->take(5)->get(),
+            ]
         );
     }
     /**
-     * Display the specified resource.
+     * Display the specified blogPost with its comments.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
