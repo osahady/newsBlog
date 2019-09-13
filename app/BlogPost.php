@@ -2,11 +2,13 @@
 
 namespace App;
 
+use App\User;
+use App\Comment;
 use App\Scopes\LatestScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Comment;
-use App\User;
+
 class BlogPost extends Model
 {
     use SoftDeletes;
@@ -22,14 +24,23 @@ class BlogPost extends Model
         return $this->belongsTo(User::class);
     }
 
-
+    /**
+     * Scope a query to only include latest blogpost
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLatest(Builder $query)
+    {
+        return $query->orderBy(static::CREATED_AT, 'desc');
+    }
 
     //soft Deleting comments
     public static function boot()
     {
         parent::boot();
 
-        static::addGlobalScope(new LatestScope);
+        // static::addGlobalScope(new LatestScope);
 
         static::deleting(function(BlogPost $b){
             $b->comments()->delete();
