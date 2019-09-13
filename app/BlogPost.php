@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\LatestScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Comment;
@@ -9,7 +10,7 @@ use App\User;
 class BlogPost extends Model
 {
     use SoftDeletes;
-    //protected $fillable = ['title', 'content'];  
+    //protected $fillable = ['title', 'content'];
     protected $guarded = [];
     public function comments()
     {
@@ -21,10 +22,15 @@ class BlogPost extends Model
         return $this->belongsTo(User::class);
     }
 
+
+
     //soft Deleting comments
     public static function boot()
     {
         parent::boot();
+
+        static::addGlobalScope(new LatestScope);
+
         static::deleting(function(BlogPost $b){
             $b->comments()->delete();
         });
