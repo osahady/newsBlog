@@ -34,10 +34,14 @@ class PostController extends Controller
     public function show($id)
     {
         //$request->session()->reflash();
+        // return view('posts.show', [
+        //     'post' => BlogPost::with(['comments'=> function($query){
+        //         return $query->latest();
+        //     }])->findOrFail($id)
+        // ]);
+
         return view('posts.show', [
-            'post' => BlogPost::with(['comments'=> function($query){
-                return $query->latest();
-            }])->findOrFail($id)
+            'post' => BlogPost::with('comments')->findOrFail($id)
         ]);
 
     }
