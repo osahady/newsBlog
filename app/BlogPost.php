@@ -5,6 +5,7 @@ namespace App;
 use App\User;
 use App\Comment;
 use App\Scopes\LatestScope;
+use App\Scopes\DeleteAdminScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -50,6 +51,7 @@ class BlogPost extends Model
     //soft Deleting comments
     public static function boot()
     {
+        static::addGlobalScope(new DeleteAdminScope);
         parent::boot();
 
         // static::addGlobalScope(new LatestScope);
